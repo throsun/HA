@@ -20,7 +20,8 @@ homeassistant:
   # 登陆验证 https://www.home-assistant.io/docs/authentication/providers/
   auth_providers:
    - type: homeassistant
-#   - type: legacy_api_password
+   - type: legacy_api_password
+     api_password: !secret api_password
    - type: trusted_networks
      trusted_networks:
       - 127.0.0.1
@@ -134,15 +135,15 @@ custom_updater:
 # ------------------------------------------------------------------------------ #
 # mqtt相关配置 https://www.home-assistant.io/components/mqtt/
 # ------------------------------------------------------------------------------ #
-mqtt:
-  password: !secret mqtt_password
+#mqtt:
+#  broker: localhost
+#  port: 1883
 
-  
+
 # ------------------------------------------------------------------------------ #
 # 网络相关配置 https://www.home-assistant.io/components/http/
 # ------------------------------------------------------------------------------ #
 http:
-  api_password: !secret api_password
   # 默认只接受IPv4访问，如果要使用IPv6访问，取消注释，二者只能选一种
 #  server_host: ::0
 #  server_port: 8123
@@ -160,12 +161,6 @@ http:
 #  trusted_proxies:
 #    - 127.0.0.1
 #    - ::1
-  # 信任的网络
-#  trusted_networks:
-#    - 127.0.0.1
-#    - ::1
-#    - 192.168.0.0/24
-#    - fd00::/48
   # 启用账密穷举保护机制
   ip_ban_enabled: true
   # 输错密码次数

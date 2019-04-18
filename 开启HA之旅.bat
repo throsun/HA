@@ -21,7 +21,7 @@ rem &连接符
 :Start
 set PATH=%PYTHON_PATH%;%PYTHON_SCRIPTS_PATH%;%NODE_PATH%;%PATH%
 color f5
-MODE con: Cols=68 Lines=30
+::MODE con: Cols=68 Lines=30
 set var=0
 echo 正在初始化(版本检测)，请稍后...
 
@@ -88,7 +88,13 @@ echo.&Pause
 goto End
 
 :Reset-user
-del %HASS_CONFIG_PATH%\.storage\auth %HASS_CONFIG_PATH%\.storage\auth_provider.homeassistant %HASS_CONFIG_PATH%\.storage\onboarding
+set file1=%HASS_CONFIG_PATH%\.storage\auth
+set file2=%HASS_CONFIG_PATH%\.storage\auth_provider.homeassistant
+set file3=%HASS_CONFIG_PATH%\.storage\onboarding
+if exist %file1% (del %file1%) else (echo 文件不存在，跳过)
+if exist %file2% (del %file2%) else (echo 文件不存在，跳过)
+if exist %file3% (del %file3%) else (echo 文件不存在，跳过)
+echo.&Pause
 goto End
 
 :Upgrade-hass
@@ -98,9 +104,9 @@ goto End
 
 :Upgrade-nodered
 rem 设置NPM环境
-set NPM_CLI_JS=%NODE_PATH%\node_modules\npm\bin\npm-cli.js
+set NPM_CLI_JS=%NODE_PATH%\node_global\node_modules\npm\bin\npm-cli.js
 rem 升级NPM
-::NODE %NPM_CLI_JS% --userconfig %NODE_PATH%\\.npmrc install npm
+NODE %NPM_CLI_JS% --userconfig %NODE_PATH%\\.npmrc install -g npm
 rem 升级node-red
 NODE %NPM_CLI_JS% --userconfig %NODE_PATH%\\.npmrc upgrade -g node-red
 rem 清理缓存

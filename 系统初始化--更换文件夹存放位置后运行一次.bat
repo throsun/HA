@@ -25,7 +25,7 @@ python -m pip install --upgrade pip
 echo.
 echo 设置npm环境...
 rem 设置NPM环境
-set NPM_CLI_JS=%NODE_PATH%\node_modules\npm\bin\npm-cli.js
+set NPM_CLI_JS=%NODE_PATH%\node_global\node_modules\npm\bin\npm-cli.js
 NODE %NPM_CLI_JS% --userconfig %NODE_PATH%\\.npmrc config set prefix="%NODE_PATH%\node_global"
 NODE %NPM_CLI_JS% --userconfig %NODE_PATH%\\.npmrc config set cache="%NODE_PATH%\node_cache"
 NODE %NPM_CLI_JS% --userconfig %NODE_PATH%\\.npmrc config set registry="https://registry.npm.taobao.org"
